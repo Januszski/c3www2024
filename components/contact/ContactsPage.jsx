@@ -204,12 +204,11 @@ export default function ContactsPage() {
 
       <div className='mt-12'>
         <h2 className='text-xl font-semibold mb-4'>Our Location</h2>
-        <div className='bg-gray-200 h-64 flex items-center justify-center rounded-lg'>
-          <p className='text-gray-600'>
-            Map placeholder - Replace with actual map component
-          </p>
+        <div className='bg-gray-200 h-64 flex items-center justify-center rounded-lg overflow-hidden'>
+          <img src="/pictures/maps.png" alt="Map" className="w-full h-full object-cover" />
         </div>
       </div>
+
     </div>
   );
 }

@@ -38,7 +38,7 @@ export default function AboutUs() {
               </div>
               <div className='relative h-64 md:h-auto'>
                 <img
-                  src='/placeholder.svg?height=400&width=600'
+                  src='/pictures/HospitalBuilding.jpeg'
                   alt='CDCare Hospital Building'
                   className='rounded-lg shadow-lg object-cover w-full h-full'
                 />
@@ -57,32 +57,32 @@ export default function AboutUs() {
                 {
                   name: "Dr. Emily Chen",
                   role: "Chief Executive Officer",
-                  image: "/placeholder.svg?height=300&width=300",
+                  image: "/pictures/DrChen.jpg",
                 },
                 {
                   name: "Dr. Michael Johnson",
                   role: "Chief Medical Officer",
-                  image: "/placeholder.svg?height=300&width=300",
+                  image: "/pictures/DrMichaelJohnson.png",
                 },
                 {
                   name: "Sarah Thompson",
                   role: "Chief Nursing Officer",
-                  image: "/placeholder.svg?height=300&width=300",
+                  image: "/pictures/SarahThompson.jpg",
                 },
                 {
                   name: "David Rodriguez",
                   role: "Chief Financial Officer",
-                  image: "/placeholder.svg?height=300&width=300",
+                  image: "/pictures/DavidRodriguez.jpg",
                 },
                 {
                   name: "Dr. Lisa Patel",
                   role: "Director of Research",
-                  image: "/placeholder.svg?height=300&width=300",
+                  image: "/pictures/DrLisaPatel.jpg",
                 },
                 {
                   name: "Robert Kim",
                   role: "Chief Information Officer",
-                  image: "/placeholder.svg?height=300&width=300",
+                  image: "/pictures/RobertKim.jpg",
                 },
               ].map((leader) => (
                 <div
