@@ -13,11 +13,41 @@ export default function ContactsPage() {
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Here you would typically handle the form submission
     console.log("Form submitted:", formData);
-    setFormStatus("Thank you for your message. We'll get back to you soon!");
+    console.log("HELLO");
+
+    try {
+      // Send a POST request to your backend endpoint
+      const response = await fetch("/api/submitContact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      console.log("Full response:", response);
+
+      const result = await response.json();
+
+      console.log("Response JSON data:", result);
+
+      if (response.ok) {
+        alert("Contact submitted!");
+        setFormStatus(""); // Clear the input after success
+      } else {
+        alert("Failed to subscribe");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("An error occurred");
+    }
+
+    //setFormStatus("Thank you for your message. We'll get back to you soon!");
+    setFormStatus(formData.message);
     setFormData({ name: "", email: "", message: "" });
   };
 
@@ -71,7 +101,7 @@ export default function ContactsPage() {
                   d='M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z'
                 />
               </svg>
-              <span>(123) 456-7890</span>
+              <span>(248) 434-5508</span>
             </li>
             <li className='flex items-center'>
               <svg
@@ -88,7 +118,7 @@ export default function ContactsPage() {
                   d='M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'
                 />
               </svg>
-              <span>contact@medicalcenter.com</span>
+              <span>ISEAGE@cdc.com</span>
             </li>
           </ul>
 
@@ -145,13 +175,15 @@ export default function ContactsPage() {
                 Message
               </label>
               <textarea
-                id='message'
+                type='message'
                 name='message'
+                id='message'
+                required
                 value={formData.message}
                 onChange={handleChange}
-                required
                 rows={4}
                 className='w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500'
+                placeholder='Enter your message here'
               ></textarea>
             </div>
             <button
@@ -162,7 +194,10 @@ export default function ContactsPage() {
             </button>
           </form>
           {formStatus && (
-            <p className='mt-4 text-center text-green-600'>{formStatus}</p>
+            <p
+              className='mt-4 text-center text-green-600'
+              dangerouslySetInnerHTML={{ __html: formStatus }}
+            ></p>
           )}
         </div>
       </div>

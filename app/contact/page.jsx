@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import ContactPage from "@/components/contact/ContactPage";
+import ContactsPage from "../../components/contact/ContactsPage";
 
 function page() {
-  return <ContactPage />;
+  return <ContactsPage />;
 }
 
 export default page;

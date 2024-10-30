@@ -1,6 +1,48 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Footer() {
+  const [email, setEmail] = useState("");
+
+  const handleChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    console.log("SUBMITTING ", email);
+
+    try {
+      // Send a POST request to your backend endpoint
+      const response = await fetch("/api/submitEmail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      console.log("Full response:", response);
+
+      const result = await response.json();
+
+      console.log("Response JSON data:", result);
+
+      if (response.ok) {
+        alert("Subscription successful!");
+        setEmail(""); // Clear the input after success
+      } else {
+        alert("Failed to subscribe");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("An error occurred");
+    }
+  };
+
   return (
     <footer className='bg-gray-800'>
       <div className='max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8'>
@@ -38,7 +80,7 @@ export default function Footer() {
                   <li className='text-base text-gray-300'>
                     123 Hospital Street, City, State 12345
                   </li>
-                  <li className='text-base text-gray-300'>(123) 456-7890</li>
+                  <li className='text-base text-gray-300'>(248) 434-5508</li>
                 </ul>
               </div>
             </div>
@@ -117,7 +159,7 @@ export default function Footer() {
             <p className='mt-4 text-base text-gray-300'>
               Get the latest news and updates from CDCare Hospital.
             </p>
-            <form className='mt-4 sm:flex sm:max-w-md'>
+            <form onSubmit={handleSubmit} className='mt-4 sm:flex sm:max-w-md'>
               <label htmlFor='email-address' className='sr-only'>
                 Email address
               </label>
@@ -127,6 +169,8 @@ export default function Footer() {
                 id='email-address'
                 autoComplete='email'
                 required
+                value={email}
+                onChange={handleChange}
                 className='appearance-none min-w-0 w-full bg-white border border-transparent rounded-md py-2 px-4 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white focus:border-white focus:placeholder-gray-400'
                 placeholder='Enter your email'
               />
