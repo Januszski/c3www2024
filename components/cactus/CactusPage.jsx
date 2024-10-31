@@ -19,14 +19,15 @@ import Image from "next/image";
 export default function Cactus() {
   return (
     <div style={{ textAlign: "center", marginTop: "20px" }}>
-      <img
-        src='/pictures/dancing-cactus.gif'
-        alt='CDCare Hospital Building'
-        className='rounded-lg shadow-lg object-cover w-full h-full'
-      />
       <h1 style={{ fontFamily: "Cactus", fontSize: "6rem" }}>
         CACTUS IS HEREEEEEEE
       </h1>
+      <img
+        src='/pictures/dancing-cactus.gif'
+        alt='CDCare Hospital Building'
+        className='rounded-lg shadow-lg w-full'
+        style={{ height: "85vh" }}
+      />
     </div>
   );
 }
