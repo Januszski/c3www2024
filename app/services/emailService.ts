@@ -11,16 +11,15 @@ const pool = new Pool({
 //   return email;
 // }
 
-export async function submitEmail(email) {
+export async function submitEmail(emailObj) {
   try {
-    // Connect to the database and execute the query
     const result = await pool.query(
-      "INSERT INTO email (email) VALUES ($1) RETURNING *",
-      [email]
+      "INSERT INTO email (email) VALUES ('" + emailObj.email + "') RETURNING *"
     );
 
-    // Return the inserted email row
-    return result.rows[0];
+    console.log("This is the result", result);
+
+    return { successful: "true" };
   } catch (error) {
     console.error("Error inserting email:", error);
     throw new Error("Failed to insert email");

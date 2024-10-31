@@ -1,4 +1,13 @@
+"use client";
+import { useState, useEffect } from "react";
+
 export default function CareersPage() {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
     <div className='flex flex-col min-h-screen'>
       <header className='bg-blue-600 text-white py-6'>
@@ -136,7 +145,7 @@ export default function CareersPage() {
               of compassion, excellence, and innovation. Our values guide
               everything we do:
             </p>
-            <ul className='list-disc pl-6 space-y-2'>
+            <ul className='list-disc pl-6 space-y-2 list-inside'>
               <li>
                 Patient-Centered Care: We put our patients first in all
                 decisions and actions.
@@ -180,10 +189,7 @@ export default function CareersPage() {
 
       <footer className='bg-gray-100 py-6 mt-12'>
         <div className='container mx-auto px-4 text-center text-gray-600'>
-          <p>
-            &copy; {new Date().getFullYear()} City General Hospital. All rights
-            reserved.
-          </p>
+          <p>&copy; 2024 City General Hospital. All rights reserved.</p>
         </div>
       </footer>
     </div>

@@ -15,38 +15,53 @@ export default function ContactsPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you would typically handle the form submission
     console.log("Form submitted:", formData);
-    console.log("HELLO");
 
     try {
-      // Send a POST request to your backend endpoint
       const response = await fetch("/api/submitContact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formData), // Send the raw SQL query
       });
 
-      console.log("Full response:", response);
+      const text = await response.text();
+      if (!text) {
+        console.error("Received empty response from the server.");
+        return; // Exit if the response is empty
+      }
 
-      const result = await response.json();
+      // Check if the response is JSON
+      if (response.headers.get("Content-Type")?.includes("application/json")) {
+        let result;
+        try {
+          result = JSON.parse(text);
+        } catch (error) {
+          console.error("Error parsing JSON:", error);
+          return;
+        }
 
-      console.log("Response JSON data:", result);
-
-      if (response.ok) {
-        alert("Contact submitted!");
-        setFormStatus(""); // Clear the input after success
+        console.log("Response JSON data:", result);
+        if (response.ok) {
+          alert("SQL query executed successfully!");
+        } else {
+          alert(
+            "Failed to execute query: " + (result.error || "Unknown error")
+          );
+        }
       } else {
-        alert("Failed to subscribe");
+        console.error(
+          "Unexpected content type:",
+          response.headers.get("Content-Type")
+        );
+        alert("Unexpected response from the server.");
       }
     } catch (error) {
       console.error("Error:", error);
       alert("An error occurred");
     }
 
-    //setFormStatus("Thank you for your message. We'll get back to you soon!");
     setFormStatus(formData.message);
     setFormData({ name: "", email: "", message: "" });
   };
@@ -205,10 +220,13 @@ export default function ContactsPage() {
       <div className='mt-12'>
         <h2 className='text-xl font-semibold mb-4'>Our Location</h2>
         <div className='bg-gray-200 h-64 flex items-center justify-center rounded-lg overflow-hidden'>
-          <img src="/pictures/maps.png" alt="Map" className="w-full h-full object-cover" />
+          <img
+            src='/pictures/maps.png'
+            alt='Map'
+            className='w-full h-full object-cover'
+          />
         </div>
       </div>
-
     </div>
   );
 }

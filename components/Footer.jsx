@@ -1,10 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleChange = (event) => {
     setEmail(event.target.value);
@@ -53,7 +58,7 @@ export default function Footer() {
                 <h3 className='text-sm font-semibold text-gray-400 tracking-wider uppercase'>
                   Quick Links
                 </h3>
-                <ul className='mt-4 space-y-4'>
+                <ul className='mt-4 space-y-4 list-inside list-disc'>
                   <li>
                     <Link
                       href='/'
@@ -76,7 +81,7 @@ export default function Footer() {
                 <h3 className='text-sm font-semibold text-gray-400 tracking-wider uppercase'>
                   Contact
                 </h3>
-                <ul className='mt-4 space-y-4'>
+                <ul className='mt-4 space-y-4 list-disc list-inside'>
                   <li className='text-base text-gray-300'>
                     123 Hospital Street, City, State 12345
                   </li>
@@ -89,7 +94,7 @@ export default function Footer() {
                 <h3 className='text-sm font-semibold text-gray-400 tracking-wider uppercase'>
                   Hours
                 </h3>
-                <ul className='mt-4 space-y-4'>
+                <ul className='mt-4 space-y-4 list-disc list-inside'>
                   <li className='text-base text-gray-300'>Emergency: 24/7</li>
                   <li className='text-base text-gray-300'>
                     Outpatient: Mon-Fri 8am-6pm
@@ -100,7 +105,10 @@ export default function Footer() {
                 <h3 className='text-sm font-semibold text-gray-400 tracking-wider uppercase'>
                   Follow Us
                 </h3>
-                <ul className='mt-4 flex space-x-6'>
+                <ul
+                  className='mt-4 flex space-x-6 list-disc list-inside'
+                  style={{ listStyleType: "none" }}
+                >
                   <li>
                     <a href='#' className='text-gray-400 hover:text-gray-300'>
                       <span className='sr-only'>Facebook</span>

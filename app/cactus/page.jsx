@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Cactus from "@/components/cactus/CactusPage";
+import Cactus from "../../components/cactus/CactusPage";
 
 function page() {
   return <Cactus />;

@@ -1,6 +1,65 @@
-// components/careers/jobPositions/HospitalAdministratorPosition.jsx
+"use client";
+
+import { useState, useEffect } from "react";
 
 export default function HospitalAdminPosition() {
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [uploadStatus, setUploadStatus] = useState("");
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const handleFileChange = (event) => {
+    const file = event.target.files?.[0];
+    if (
+      file &&
+      (file.type === "application/pdf" ||
+        file.type ===
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+    ) {
+      setSelectedFile(file);
+      setUploadStatus("");
+    } else {
+      alert("Please upload a PDF or DOCX file.");
+      event.target.value = "";
+    }
+  };
+
+  const handleUpload = async () => {
+    if (selectedFile) {
+      setUploadStatus("Uploading...");
+
+      // Create a FormData object to hold the file
+      const formData = new FormData();
+      formData.append("file", selectedFile); // Use "file" to match your API endpoint's expected field name
+
+      try {
+        // Send the file to the server
+        const response = await fetch("/api/submitResume", {
+          method: "POST",
+          body: formData,
+        });
+
+        console.log("GOT HERE");
+
+        // Check if the response is ok (status in the range 200-299)
+        if (response.ok) {
+          const data = await response.json();
+          setUploadStatus(`Upload successful!`);
+        } else {
+          setUploadStatus("Upload failed.");
+        }
+      } catch (error) {
+        console.error("Upload error:", error);
+        setUploadStatus("Upload failed due to an error.");
+      }
+
+      setSelectedFile(null);
+    }
+  };
+
   return (
     <div className='min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8'>
       <div className='max-w-4xl mx-auto bg-white shadow-md rounded-lg overflow-hidden'>
@@ -26,7 +85,7 @@ export default function HospitalAdminPosition() {
           <h3 className='text-lg font-semibold text-gray-900 mb-2'>
             Responsibilities:
           </h3>
-          <ul className='list-disc pl-5 mb-4 text-gray-700'>
+          <ul className='list-disc pl-5 mb-4 text-gray-700 list-inside'>
             <li>Direct the day-to-day operations of the hospital</li>
             <li>Ensure compliance with healthcare regulations and standards</li>
             <li>
@@ -51,9 +110,9 @@ export default function HospitalAdminPosition() {
           <h3 className='text-lg font-semibold text-gray-900 mb-2'>
             Qualifications:
           </h3>
-          <ul className='list-disc pl-5 mb-4 text-gray-700'>
+          <ul className='list-disc pl-5 mb-4 text-gray-700 list-inside'>
             <li>
-              Bachelor’s degree in Healthcare Administration, Business
+              Bachelor's degree in Healthcare Administration, Business
               Administration, or related field (Master's preferred)
             </li>
             <li>
@@ -75,7 +134,7 @@ export default function HospitalAdminPosition() {
           <h3 className='text-lg font-semibold text-gray-900 mb-2'>
             We Offer:
           </h3>
-          <ul className='list-disc pl-5 mb-6 text-gray-700'>
+          <ul className='list-disc pl-5 mb-6 text-gray-700 list-inside'>
             <li>Competitive salary and comprehensive benefits package</li>
             <li>Opportunities for professional growth and development</li>
             <li>Supportive leadership and collaborative work culture</li>
@@ -84,25 +143,31 @@ export default function HospitalAdminPosition() {
 
           <div className='mt-8 border-t border-gray-200 pt-8'>
             <h3 className='text-lg font-semibold text-gray-900 mb-4'>
-              How to Apply
+              Apply Now
             </h3>
-            <p className='mb-4 text-gray-700'>
-              If you are a visionary leader passionate about improving
-              healthcare delivery, we encourage you to apply. Please send your
-              resume and cover letter to{" "}
-              <a
-                href='mailto:careers@hospitalname.com'
-                className='text-blue-600 hover:underline'
+            <div className='flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4'>
+              <input
+                type='file'
+                accept='.pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                onChange={handleFileChange}
+                className='w-full sm:w-auto'
+              />
+              <button
+                onClick={handleUpload}
+                disabled={!selectedFile}
+                className='w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed'
               >
-                careers@hospitalname.com
-              </a>{" "}
-              with the subject line "Hospital Administrator Application".
-            </p>
-            <p className='text-gray-700'>
-              We appreciate your interest in joining our team and will review
-              all applications carefully. Only shortlisted candidates will be
-              contacted for an interview.
-            </p>
+                Upload Resume
+              </button>
+            </div>
+            {selectedFile && (
+              <p className='mt-2 text-sm text-gray-600'>
+                Selected file: {selectedFile.name}
+              </p>
+            )}
+            {uploadStatus && (
+              <p className='mt-2 text-sm text-gray-600'>{uploadStatus}</p>
+            )}
           </div>
         </div>
       </div>
