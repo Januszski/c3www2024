@@ -145,29 +145,15 @@ export default function HospitalAdminPosition() {
             <h3 className='text-lg font-semibold text-gray-900 mb-4'>
               Apply Now
             </h3>
-            <div className='flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4'>
-              <input
-                type='file'
-                accept='.pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-                onChange={handleFileChange}
-                className='w-full sm:w-auto'
-              />
-              <button
-                onClick={handleUpload}
-                disabled={!selectedFile}
-                className='w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed'
-              >
-                Upload Resume
+
+            <a
+              href='http://localhost/upload-resume'
+              style={{ textDecoration: "none" }}
+            >
+              <button className='px-6 py-3 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2'>
+                Go to Upload Resume
               </button>
-            </div>
-            {selectedFile && (
-              <p className='mt-2 text-sm text-gray-600'>
-                Selected file: {selectedFile.name}
-              </p>
-            )}
-            {uploadStatus && (
-              <p className='mt-2 text-sm text-gray-600'>{uploadStatus}</p>
-            )}
+            </a>
           </div>
         </div>
       </div>
