@@ -1,3 +1,4 @@
+import Image from "next/image";
 export default function AboutUs() {
   return (
     <div className='flex flex-col min-h-screen'>
@@ -26,12 +27,12 @@ export default function AboutUs() {
                 <p className='text-lg text-gray-500 mb-6'>
                   Founded in 1985, CDCare Hospital began as a small community
                   clinic with a vision to provide accessible, high-quality
-                  healthcare to all. Over the years, we've grown into a leading
-                  medical institution, continuously adapting to meet the
+                  healthcare to all. Over the years, we&apos;ve grown into a
+                  leading medical institution, continuously adapting to meet the
                   evolving needs of our patients and community.
                 </p>
                 <p className='text-lg text-gray-500'>
-                  Today, we're proud to be at the forefront of medical
+                  Today, we&apos;re proud to be at the forefront of medical
                   innovation, offering cutting-edge treatments while maintaining
                   our commitment to compassionate, patient-centered care.
                 </p>
@@ -112,8 +113,8 @@ export default function AboutUs() {
               Join Our Team
             </h2>
             <p className='text-xl text-gray-500 mb-8'>
-              We're always looking for talented individuals to join our mission
-              of providing exceptional healthcare.
+              We&apos;re always looking for talented individuals to join our
+              mission of providing exceptional healthcare.
             </p>
             <a
               href='/careers'

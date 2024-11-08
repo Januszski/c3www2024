@@ -185,7 +185,8 @@ export default function HospitalAdminPosition() {
           </h3>
           <ul className='list-disc pl-5 mb-4 text-gray-700'>
             <li>
-              Evaluate patients' physical conditions and functional limitations
+              Evaluate patients&apos; physical conditions and functional
+              limitations
             </li>
             <li>Develop and implement personalized treatment plans</li>
             <li>

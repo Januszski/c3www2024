@@ -112,8 +112,8 @@ export default function HospitalAdminPosition() {
           </h3>
           <ul className='list-disc pl-5 mb-4 text-gray-700 list-inside'>
             <li>
-              Bachelor's degree in Healthcare Administration, Business
-              Administration, or related field (Master's preferred)
+              Bachelor&apos;s degree in Healthcare Administration, Business
+              Administration, or related field (Master&apos;s preferred)
             </li>
             <li>
               Proven experience in hospital administration or healthcare

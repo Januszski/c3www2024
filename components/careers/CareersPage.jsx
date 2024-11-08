@@ -24,8 +24,8 @@ export default function CareersPage() {
             Join Our Team of Healthcare Heroes
           </h2>
           <p className='text-xl text-gray-600 mb-6'>
-            Make a difference in people's lives every day. We're looking for
-            passionate individuals to join our dedicated team.
+            Make a difference in people&apos;s lives every day. We&apos;re
+            looking for passionate individuals to join our dedicated team.
           </p>
           <a
             href='#job-openings'
@@ -141,9 +141,9 @@ export default function CareersPage() {
           </h2>
           <div className='bg-white p-6 rounded-lg shadow-md'>
             <p className='mb-4'>
-              At City General Hospital, we're committed to fostering a culture
-              of compassion, excellence, and innovation. Our values guide
-              everything we do:
+              At City General Hospital, we&apos;re committed to fostering a
+              culture of compassion, excellence, and innovation. Our values
+              guide everything we do:
             </p>
             <ul className='list-disc pl-6 space-y-2 list-inside'>
               <li>
